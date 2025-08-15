@@ -2,8 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navigation } from "./components/Navigation";
 import { HomePage } from "./pages/HomePage";
 import { InfluencerRoom } from "./pages/InfluencerRoom";
-import { InfluencerProfile } from "./pages/InfluencerProfile";
-import { DuelsArena } from "./pages/DuelsArena";
 import { NotFound } from "./pages/NotFound";
 import { PlaceholderPage } from "./pages/PlaceholderPage";
 
