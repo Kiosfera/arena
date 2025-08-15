@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { 
-  ArrowLeft, 
-  Users, 
-  Heart, 
-  Share, 
-  Send, 
-  Crown, 
-  Sword, 
+import {
+  ArrowLeft,
+  Users,
+  Heart,
+  Share,
+  Send,
+  Crown,
+  Sword,
   DollarSign,
   Timer,
   TrendingUp,
   Play,
   Eye,
-  Volume2
+  Volume2,
 } from "lucide-react";
 
 interface DuelParticipant {
@@ -55,21 +55,21 @@ const mockDuel: ActiveDuel = {
       avatar: "👨‍🦱",
       votes: 1247,
       percentage: 58,
-      totalBets: 5420
+      totalBets: 5420,
     },
     {
       id: "alex",
-      name: "Alex", 
+      name: "Alex",
       avatar: "👨‍🦰",
       votes: 897,
       percentage: 42,
-      totalBets: 3890
-    }
+      totalBets: 3890,
+    },
   ],
   timeRemaining: 180,
   totalPot: 9310,
   isActive: true,
-  description: "Duelo de Conhecimentos Gerais"
+  description: "Duelo de Conhecimentos Gerais",
 };
 
 export function InfluencerRoom() {
@@ -83,31 +83,31 @@ export function InfluencerRoom() {
   const roomInfo = {
     "rancho-maia": {
       name: "Rancho do Maia",
-      influencer: "Carlinhos Maia", 
+      influencer: "Carlinhos Maia",
       avatar: "🤠",
       viewers: 15420,
-      description: "Reality show com desafios e eliminações"
+      description: "Reality show com desafios e eliminações",
     },
     "casa-virginia": {
       name: "Casa da Virginia",
       influencer: "Virginia Fonseca",
-      avatar: "👸", 
+      avatar: "👸",
       viewers: 8930,
-      description: "Lifestyle e dinâmicas divertidas"
+      description: "Lifestyle e dinâmicas divertidas",
     },
     "arena-combate": {
       name: "Arena de Combate",
       influencer: "Luva de Pedreiro",
-      avatar: "🥊", 
+      avatar: "🥊",
       viewers: 12100,
-      description: "Duelos e competições épicas"
-    }
+      description: "Duelos e competições épicas",
+    },
   }[influencerId as string] || {
     name: "Sala do Influenciador",
     influencer: "Influenciador",
     avatar: "⭐",
     viewers: 5000,
-    description: "Entretenimento ao vivo"
+    description: "Entretenimento ao vivo",
   };
 
   // Timer for duel
@@ -115,9 +115,9 @@ export function InfluencerRoom() {
     if (!currentDuel.isActive) return;
 
     const timer = setInterval(() => {
-      setCurrentDuel(prev => ({
+      setCurrentDuel((prev) => ({
         ...prev,
-        timeRemaining: Math.max(0, prev.timeRemaining - 1)
+        timeRemaining: Math.max(0, prev.timeRemaining - 1),
       }));
     }, 1000);
 
@@ -133,7 +133,7 @@ export function InfluencerRoom() {
         message: "Galera, o duelo começou! Quem vocês acham que vai ganhar?",
         timestamp: new Date(Date.now() - 300000),
         isInfluencer: true,
-        avatar: roomInfo.avatar
+        avatar: roomInfo.avatar,
       },
       {
         id: "2",
@@ -143,46 +143,50 @@ export function InfluencerRoom() {
         avatar: "👩",
         type: "bet",
         betAmount: 50,
-        betTarget: "José"
+        betTarget: "José",
       },
       {
         id: "3",
         user: "Pedro",
         message: "Alex vai surpreender! 💪",
         timestamp: new Date(Date.now() - 180000),
-        avatar: "👨"
-      }
+        avatar: "👨",
+      },
     ];
-    
+
     setChatMessages(mockMessages);
   }, [roomInfo]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
 
   const handleBet = (participantId: string) => {
-    const participant = currentDuel.participants.find(p => p.id === participantId);
-    
+    const participant = currentDuel.participants.find(
+      (p) => p.id === participantId,
+    );
+
     if (participant) {
       // Update duel stats
-      setCurrentDuel(prev => {
-        const newParticipants = prev.participants.map(p => 
-          p.id === participantId 
+      setCurrentDuel((prev) => {
+        const newParticipants = prev.participants.map((p) =>
+          p.id === participantId
             ? { ...p, votes: p.votes + 1, totalBets: p.totalBets + betAmount }
-            : p
+            : p,
         ) as [DuelParticipant, DuelParticipant];
-        
+
         const totalVotes = newParticipants[0].votes + newParticipants[1].votes;
-        newParticipants[0].percentage = Math.round((newParticipants[0].votes / totalVotes) * 100);
+        newParticipants[0].percentage = Math.round(
+          (newParticipants[0].votes / totalVotes) * 100,
+        );
         newParticipants[1].percentage = 100 - newParticipants[0].percentage;
-        
+
         return {
           ...prev,
           participants: newParticipants,
-          totalPot: prev.totalPot + betAmount
+          totalPot: prev.totalPot + betAmount,
         };
       });
 
@@ -195,10 +199,10 @@ export function InfluencerRoom() {
         avatar: "😊",
         type: "bet",
         betAmount,
-        betTarget: participant.name
+        betTarget: participant.name,
       };
 
-      setChatMessages(prev => [...prev, betMessage]);
+      setChatMessages((prev) => [...prev, betMessage]);
     }
   };
 
@@ -211,10 +215,10 @@ export function InfluencerRoom() {
       user: "Você",
       message: newMessage,
       timestamp: new Date(),
-      avatar: "😊"
+      avatar: "😊",
     };
 
-    setChatMessages(prev => [...prev, message]);
+    setChatMessages((prev) => [...prev, message]);
     setNewMessage("");
   };
 
@@ -224,10 +228,13 @@ export function InfluencerRoom() {
       <div className="bg-slate-800/50 border-b border-slate-700 p-4 backdrop-blur-sm">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <Link to="/" className="text-gray-400 hover:text-blue-400 transition-colors">
+            <Link
+              to="/"
+              className="text-gray-400 hover:text-blue-400 transition-colors"
+            >
               <ArrowLeft className="h-6 w-6" />
             </Link>
-            
+
             <div className="flex items-center space-x-4">
               <div className="text-4xl">{roomInfo.avatar}</div>
               <div>
@@ -236,7 +243,10 @@ export function InfluencerRoom() {
                   <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
                 </h1>
                 <p className="text-gray-400">
-                  por <span className="text-purple-400 font-medium">{roomInfo.influencer}</span>
+                  por{" "}
+                  <span className="text-purple-400 font-medium">
+                    {roomInfo.influencer}
+                  </span>
                 </p>
               </div>
             </div>
@@ -247,13 +257,13 @@ export function InfluencerRoom() {
               <Eye className="h-4 w-4 text-blue-400" />
               <span>{roomInfo.viewers.toLocaleString()}</span>
             </div>
-            
+
             <div className="flex items-center space-x-3">
-              <button 
+              <button
                 onClick={() => setIsLiked(!isLiked)}
                 className={`p-3 rounded-xl transition-all duration-300 ${
-                  isLiked 
-                    ? "bg-red-500 text-white shadow-lg shadow-red-500/25" 
+                  isLiked
+                    ? "bg-red-500 text-white shadow-lg shadow-red-500/25"
                     : "bg-slate-700 hover:bg-slate-600 text-gray-300"
                 }`}
               >
@@ -274,16 +284,16 @@ export function InfluencerRoom() {
             {/* Video/Stream Area */}
             <div className="aspect-video bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl border border-slate-700 flex items-center justify-center relative overflow-hidden">
               <div className="text-9xl opacity-60">{roomInfo.avatar}</div>
-              
+
               {/* Stream Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-              
+
               {/* Live Badge */}
               <div className="absolute top-6 left-6 bg-red-500 text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center space-x-3 animate-pulse">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
                 <span>AO VIVO</span>
               </div>
-              
+
               {/* Controls */}
               <div className="absolute bottom-6 left-6 flex items-center space-x-4">
                 <button className="bg-black/60 hover:bg-black/80 text-white p-3 rounded-xl transition-colors backdrop-blur-sm">
@@ -293,10 +303,12 @@ export function InfluencerRoom() {
                   <Volume2 className="h-6 w-6" />
                 </button>
               </div>
-              
+
               {/* Stream Info */}
               <div className="absolute bottom-6 right-6 text-white text-right">
-                <h2 className="text-3xl font-bold mb-2">{roomInfo.description}</h2>
+                <h2 className="text-3xl font-bold mb-2">
+                  {roomInfo.description}
+                </h2>
                 <p className="text-white/80">Assista a transmissão ao vivo</p>
               </div>
             </div>
@@ -309,37 +321,47 @@ export function InfluencerRoom() {
                     <Sword className="h-8 w-8 text-purple-400" />
                     <h2 className="text-3xl font-bold">Duelo Ativo</h2>
                   </div>
-                  
+
                   <div className="flex items-center space-x-6">
                     <div className="flex items-center space-x-3 text-blue-400">
                       <Timer className="h-5 w-5" />
-                      <span className="font-mono text-xl">{formatTime(currentDuel.timeRemaining)}</span>
+                      <span className="font-mono text-xl">
+                        {formatTime(currentDuel.timeRemaining)}
+                      </span>
                     </div>
-                    
+
                     <div className="flex items-center space-x-3 text-green-400">
                       <DollarSign className="h-5 w-5" />
-                      <span className="font-bold text-xl">R$ {currentDuel.totalPot.toLocaleString()}</span>
+                      <span className="font-bold text-xl">
+                        R$ {currentDuel.totalPot.toLocaleString()}
+                      </span>
                     </div>
                   </div>
                 </div>
 
-                <p className="text-gray-300 text-lg mb-8">{currentDuel.description}</p>
+                <p className="text-gray-300 text-lg mb-8">
+                  {currentDuel.description}
+                </p>
 
                 {/* Duel Participants */}
                 <div className="grid md:grid-cols-2 gap-8">
                   {currentDuel.participants.map((participant, index) => (
-                    <div 
+                    <div
                       key={participant.id}
                       className={`relative p-8 rounded-2xl border-2 transition-all duration-300 ${
-                        index === 0 
+                        index === 0
                           ? "bg-gradient-to-br from-blue-500/20 to-blue-600/10 border-blue-400/50"
                           : "bg-gradient-to-br from-pink-500/20 to-pink-600/10 border-pink-400/50"
                       }`}
                     >
                       {/* Participant Info */}
                       <div className="text-center mb-6">
-                        <div className="text-8xl mb-4">{participant.avatar}</div>
-                        <h3 className="text-2xl font-bold mb-2">{participant.name}</h3>
+                        <div className="text-8xl mb-4">
+                          {participant.avatar}
+                        </div>
+                        <h3 className="text-2xl font-bold mb-2">
+                          {participant.name}
+                        </h3>
                         <div className="text-gray-400">
                           {participant.votes.toLocaleString()} votos
                         </div>
@@ -349,10 +371,12 @@ export function InfluencerRoom() {
                       <div className="mb-6">
                         <div className="flex justify-between text-sm mb-3">
                           <span>Apoio</span>
-                          <span className="font-bold text-lg">{participant.percentage}%</span>
+                          <span className="font-bold text-lg">
+                            {participant.percentage}%
+                          </span>
                         </div>
                         <div className="h-4 bg-slate-700 rounded-full overflow-hidden">
-                          <div 
+                          <div
                             className={`h-full transition-all duration-500 rounded-full ${
                               index === 0 ? "bg-blue-400" : "bg-pink-400"
                             }`}
@@ -364,9 +388,10 @@ export function InfluencerRoom() {
                       {/* Betting */}
                       <div className="space-y-4">
                         <div className="text-center text-gray-400">
-                          Total apostado: R$ {participant.totalBets.toLocaleString()}
+                          Total apostado: R${" "}
+                          {participant.totalBets.toLocaleString()}
                         </div>
-                        
+
                         <button
                           onClick={() => handleBet(participant.id)}
                           className={`w-full py-4 px-6 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center space-x-3 ${
@@ -386,7 +411,9 @@ export function InfluencerRoom() {
                 {/* Bet Amount Selector */}
                 <div className="mt-8 p-6 bg-slate-700/30 rounded-xl">
                   <div className="flex items-center justify-center space-x-4">
-                    <span className="text-lg font-medium">Valor da aposta:</span>
+                    <span className="text-lg font-medium">
+                      Valor da aposta:
+                    </span>
                     <div className="flex items-center space-x-3">
                       {[5, 10, 25, 50, 100].map((amount) => (
                         <button
@@ -427,40 +454,58 @@ export function InfluencerRoom() {
                   }`}
                 >
                   <div className="flex-shrink-0">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${
-                      msg.isInfluencer 
-                        ? "bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg shadow-purple-500/25" 
-                        : msg.type === "bet"
-                        ? "bg-green-500 shadow-lg shadow-green-500/25"
-                        : msg.user === "Você"
-                        ? "bg-blue-500 shadow-lg shadow-blue-500/25"
-                        : "bg-slate-600"
-                    }`}>
-                      {msg.type === "bet" ? <DollarSign className="h-4 w-4" /> : msg.avatar}
+                    <div
+                      className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${
+                        msg.isInfluencer
+                          ? "bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg shadow-purple-500/25"
+                          : msg.type === "bet"
+                            ? "bg-green-500 shadow-lg shadow-green-500/25"
+                            : msg.user === "Você"
+                              ? "bg-blue-500 shadow-lg shadow-blue-500/25"
+                              : "bg-slate-600"
+                      }`}
+                    >
+                      {msg.type === "bet" ? (
+                        <DollarSign className="h-4 w-4" />
+                      ) : (
+                        msg.avatar
+                      )}
                     </div>
                   </div>
-                  
-                  <div className={`max-w-[75%] ${msg.user === "Você" && "text-right"}`}>
+
+                  <div
+                    className={`max-w-[75%] ${msg.user === "Você" && "text-right"}`}
+                  >
                     <div className="flex items-center space-x-2 mb-1">
-                      <span className={`text-sm font-medium ${
-                        msg.isInfluencer && "text-purple-400 flex items-center space-x-1"
-                      } ${msg.type === "bet" && "text-green-400"}`}>
+                      <span
+                        className={`text-sm font-medium ${
+                          msg.isInfluencer &&
+                          "text-purple-400 flex items-center space-x-1"
+                        } ${msg.type === "bet" && "text-green-400"}`}
+                      >
                         {msg.isInfluencer && <Crown className="h-3 w-3" />}
-                        {msg.type === "bet" && <TrendingUp className="h-3 w-3" />}
+                        {msg.type === "bet" && (
+                          <TrendingUp className="h-3 w-3" />
+                        )}
                         <span>{msg.user}</span>
                       </span>
                       <span className="text-xs text-gray-500">
-                        {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        {msg.timestamp.toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
                       </span>
                     </div>
-                    
-                    <div className={`px-4 py-3 rounded-2xl text-sm ${
-                      msg.user === "Você"
-                        ? "bg-blue-500 text-white"
-                        : msg.type === "bet"
-                        ? "bg-green-500/20 border border-green-500/30 text-green-300"
-                        : "bg-slate-700 text-gray-100"
-                    }`}>
+
+                    <div
+                      className={`px-4 py-3 rounded-2xl text-sm ${
+                        msg.user === "Você"
+                          ? "bg-blue-500 text-white"
+                          : msg.type === "bet"
+                            ? "bg-green-500/20 border border-green-500/30 text-green-300"
+                            : "bg-slate-700 text-gray-100"
+                      }`}
+                    >
                       {msg.message}
                     </div>
                   </div>
@@ -469,7 +514,10 @@ export function InfluencerRoom() {
             </div>
 
             {/* Message Input */}
-            <form onSubmit={handleSendMessage} className="p-6 border-t border-slate-700">
+            <form
+              onSubmit={handleSendMessage}
+              className="p-6 border-t border-slate-700"
+            >
               <div className="flex space-x-3">
                 <input
                   type="text"
