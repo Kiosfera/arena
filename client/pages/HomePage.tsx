@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Send, Users, Eye, Flame, Crown, MessageCircle, Video } from "lucide-react";
+import {
+  Send,
+  Users,
+  Eye,
+  Flame,
+  Crown,
+  MessageCircle,
+  Video,
+} from "lucide-react";
 
 interface ChatMessage {
   id: string;
@@ -28,21 +36,21 @@ const mockMessages: ChatMessage[] = [
     message: "Galera, hoje vai ter duelo épico! 🔥",
     timestamp: new Date(Date.now() - 300000),
     isInfluencer: true,
-    avatar: "🤠"
+    avatar: "🤠",
   },
   {
-    id: "2", 
+    id: "2",
     user: "Ana",
     message: "Mal posso esperar! Quem vai duelar?",
     timestamp: new Date(Date.now() - 240000),
-    avatar: "👩"
+    avatar: "👩",
   },
   {
     id: "3",
     user: "João",
     message: "Apostando no José hoje!",
     timestamp: new Date(Date.now() - 180000),
-    avatar: "👨"
+    avatar: "👨",
   },
   {
     id: "4",
@@ -50,15 +58,15 @@ const mockMessages: ChatMessage[] = [
     message: "Preparando uma surpresa especial! ✨",
     timestamp: new Date(Date.now() - 120000),
     isInfluencer: true,
-    avatar: "👸"
+    avatar: "👸",
   },
   {
     id: "5",
     user: "Pedro",
     message: "Arena Social tá ficando insano! 🚀",
     timestamp: new Date(Date.now() - 60000),
-    avatar: "🧑"
-  }
+    avatar: "🧑",
+  },
 ];
 
 const mockRooms: LiveRoom[] = [
@@ -69,7 +77,7 @@ const mockRooms: LiveRoom[] = [
     viewers: 15420,
     thumbnail: "🤠",
     isLive: true,
-    category: "Reality Show"
+    category: "Reality Show",
   },
   {
     id: "casa-virginia",
@@ -78,7 +86,7 @@ const mockRooms: LiveRoom[] = [
     viewers: 8930,
     thumbnail: "👸",
     isLive: true,
-    category: "Lifestyle"
+    category: "Lifestyle",
   },
   {
     id: "arena-combate",
@@ -87,7 +95,7 @@ const mockRooms: LiveRoom[] = [
     viewers: 12100,
     thumbnail: "🥊",
     isLive: false,
-    category: "Duelos"
+    category: "Duelos",
   },
   {
     id: "talk-show",
@@ -96,8 +104,8 @@ const mockRooms: LiveRoom[] = [
     viewers: 6780,
     thumbnail: "🎭",
     isLive: true,
-    category: "Talk Show"
-  }
+    category: "Talk Show",
+  },
 ];
 
 export function HomePage() {
@@ -113,25 +121,28 @@ export function HomePage() {
         "Esse duelo vai ser épico!",
         "Arena Social é o futuro! 🚀",
         "Apoiando o time azul! 💙",
-        "Que energia incrível! ⚡"
+        "Que energia incrível! ⚡",
       ];
-      
+
       const randomUsers = ["Miguel", "Sofia", "Lucas", "Isabella", "Davi"];
       const randomAvatars = ["👦", "👧", "👨", "👩", "🧑"];
-      
-      const randomMessage = randomMessages[Math.floor(Math.random() * randomMessages.length)];
-      const randomUser = randomUsers[Math.floor(Math.random() * randomUsers.length)];
-      const randomAvatar = randomAvatars[Math.floor(Math.random() * randomAvatars.length)];
-      
+
+      const randomMessage =
+        randomMessages[Math.floor(Math.random() * randomMessages.length)];
+      const randomUser =
+        randomUsers[Math.floor(Math.random() * randomUsers.length)];
+      const randomAvatar =
+        randomAvatars[Math.floor(Math.random() * randomAvatars.length)];
+
       const newMsg: ChatMessage = {
         id: Date.now().toString(),
         user: randomUser,
         message: randomMessage,
         timestamp: new Date(),
-        avatar: randomAvatar
+        avatar: randomAvatar,
       };
-      
-      setChatMessages(prev => [...prev.slice(-20), newMsg]);
+
+      setChatMessages((prev) => [...prev.slice(-20), newMsg]);
     }, 8000);
 
     return () => clearInterval(interval);
@@ -146,10 +157,10 @@ export function HomePage() {
       user: "Você",
       message: newMessage,
       timestamp: new Date(),
-      avatar: "😊"
+      avatar: "😊",
     };
 
-    setChatMessages(prev => [...prev, message]);
+    setChatMessages((prev) => [...prev, message]);
     setNewMessage("");
   };
 
@@ -173,7 +184,9 @@ export function HomePage() {
             </div>
             <div className="flex items-center space-x-2">
               <Flame className="h-4 w-4 text-red-400" />
-              <span>{activeRooms.filter(r => r.isLive).length} salas ao vivo</span>
+              <span>
+                {activeRooms.filter((r) => r.isLive).length} salas ao vivo
+              </span>
             </div>
           </div>
         </div>
@@ -201,7 +214,7 @@ export function HomePage() {
                   {/* Thumbnail */}
                   <div className="aspect-video bg-gradient-to-br from-blue-500/20 to-purple-600/20 flex items-center justify-center relative">
                     <div className="text-8xl">{room.thumbnail}</div>
-                    
+
                     {/* Live Badge */}
                     {room.isLive && (
                       <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center space-x-2 animate-pulse">
@@ -209,7 +222,7 @@ export function HomePage() {
                         <span>AO VIVO</span>
                       </div>
                     )}
-                    
+
                     {/* Viewers */}
                     <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm flex items-center space-x-2">
                       <Eye className="h-4 w-4" />
@@ -221,20 +234,24 @@ export function HomePage() {
                   <div className="p-6">
                     <div className="flex items-center space-x-2 mb-3">
                       <Crown className="h-5 w-5 text-purple-400" />
-                      <span className="text-purple-400 font-medium">{room.influencer}</span>
+                      <span className="text-purple-400 font-medium">
+                        {room.influencer}
+                      </span>
                     </div>
-                    
+
                     <h3 className="font-bold text-xl mb-3 group-hover:text-blue-400 transition-colors">
                       {room.name}
                     </h3>
-                    
+
                     <div className="flex items-center justify-between">
                       <span className="text-gray-400">{room.category}</span>
-                      <div className={`px-3 py-1 rounded-full text-sm font-medium ${
-                        room.isLive 
-                          ? "bg-red-500/20 text-red-400"
-                          : "bg-purple-500/20 text-purple-400"
-                      }`}>
+                      <div
+                        className={`px-3 py-1 rounded-full text-sm font-medium ${
+                          room.isLive
+                            ? "bg-red-500/20 text-red-400"
+                            : "bg-purple-500/20 text-purple-400"
+                        }`}
+                      >
                         {room.isLive ? "Ao Vivo" : "Iniciando"}
                       </div>
                     </div>
@@ -266,35 +283,47 @@ export function HomePage() {
                   }`}
                 >
                   <div className="flex-shrink-0">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${
-                      msg.isInfluencer 
-                        ? "bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg shadow-purple-500/25" 
-                        : msg.user === "Você"
-                        ? "bg-blue-500 shadow-lg shadow-blue-500/25"
-                        : "bg-slate-600"
-                    }`}>
+                    <div
+                      className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${
+                        msg.isInfluencer
+                          ? "bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg shadow-purple-500/25"
+                          : msg.user === "Você"
+                            ? "bg-blue-500 shadow-lg shadow-blue-500/25"
+                            : "bg-slate-600"
+                      }`}
+                    >
                       {msg.avatar}
                     </div>
                   </div>
-                  
-                  <div className={`max-w-[75%] ${msg.user === "Você" && "text-right"}`}>
+
+                  <div
+                    className={`max-w-[75%] ${msg.user === "Você" && "text-right"}`}
+                  >
                     <div className="flex items-center space-x-2 mb-1">
-                      <span className={`text-sm font-medium ${
-                        msg.isInfluencer && "text-purple-400 flex items-center space-x-1"
-                      }`}>
+                      <span
+                        className={`text-sm font-medium ${
+                          msg.isInfluencer &&
+                          "text-purple-400 flex items-center space-x-1"
+                        }`}
+                      >
                         {msg.isInfluencer && <Crown className="h-3 w-3" />}
                         <span>{msg.user}</span>
                       </span>
                       <span className="text-xs text-gray-500">
-                        {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        {msg.timestamp.toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
                       </span>
                     </div>
-                    
-                    <div className={`px-4 py-3 rounded-2xl text-sm ${
-                      msg.user === "Você"
-                        ? "bg-blue-500 text-white"
-                        : "bg-slate-700 text-gray-100"
-                    }`}>
+
+                    <div
+                      className={`px-4 py-3 rounded-2xl text-sm ${
+                        msg.user === "Você"
+                          ? "bg-blue-500 text-white"
+                          : "bg-slate-700 text-gray-100"
+                      }`}
+                    >
                       {msg.message}
                     </div>
                   </div>
@@ -303,7 +332,10 @@ export function HomePage() {
             </div>
 
             {/* Message Input */}
-            <form onSubmit={handleSendMessage} className="p-6 border-t border-slate-700">
+            <form
+              onSubmit={handleSendMessage}
+              className="p-6 border-t border-slate-700"
+            >
               <div className="flex space-x-3">
                 <input
                   type="text"
