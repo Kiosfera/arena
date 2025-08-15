@@ -31,7 +31,7 @@ export function Navigation() {
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => {
               const Icon = item.icon;
-              
+
               return (
                 <Link
                   key={item.href}
@@ -53,7 +53,7 @@ export function Navigation() {
           <div className="md:hidden flex items-center space-x-4">
             {navItems.map((item) => {
               const Icon = item.icon;
-              
+
               return (
                 <Link
                   key={item.href}

@@ -15,7 +15,10 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/room/:influencerId" element={<InfluencerRoom />} />
-            <Route path="/profile/:influencerId" element={<InfluencerProfile />} />
+            <Route
+              path="/profile/:influencerId"
+              element={<InfluencerProfile />}
+            />
             <Route path="/duels" element={<DuelsArena />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
