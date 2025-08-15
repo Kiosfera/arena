@@ -12,14 +12,14 @@ export function BeRealHome() {
   const [hasPostedToday, setHasPostedToday] = useState(false);
   const [notifications] = useState<Notification[]>([
     { id: "1", message: "João postou seu BeReal", time: "5 min" },
-    { id: "2", message: "Maria comentou na sua foto", time: "12 min" }
+    { id: "2", message: "Maria comentou na sua foto", time: "12 min" },
   ]);
 
   // Countdown timer
   useEffect(() => {
     if (timeLeft > 0 && !hasPostedToday) {
       const timer = setInterval(() => {
-        setTimeLeft(prev => prev - 1);
+        setTimeLeft((prev) => prev - 1);
       }, 1000);
       return () => clearInterval(timer);
     }
@@ -28,7 +28,7 @@ export function BeRealHome() {
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
 
   const handleTakePhoto = () => {
@@ -45,14 +45,18 @@ export function BeRealHome() {
               <div className="flex items-center space-x-3">
                 <Clock className="h-5 w-5 text-blue-400" />
                 <span className="text-blue-400 font-medium">
-                  {timeLeft > 0 ? `${formatTime(timeLeft)} para postar` : "Tempo esgotado!"}
+                  {timeLeft > 0
+                    ? `${formatTime(timeLeft)} para postar`
+                    : "Tempo esgotado!"}
                 </span>
               </div>
               <Bell className="h-5 w-5 text-blue-400" />
             </div>
           ) : (
             <div className="flex items-center justify-center bg-green-600/20 border border-green-500/30 rounded-xl p-3">
-              <span className="text-green-400 font-medium">✓ Você postou hoje!</span>
+              <span className="text-green-400 font-medium">
+                ✓ Você postou hoje!
+              </span>
             </div>
           )}
         </div>
@@ -64,16 +68,16 @@ export function BeRealHome() {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold mb-2">BeReal.</h1>
-            <p className="text-gray-400 text-lg">
-              Seja autêntico. Seja real.
-            </p>
+            <p className="text-gray-400 text-lg">Seja autêntico. Seja real.</p>
           </div>
 
           {!hasPostedToday ? (
             /* Camera Capture Area */
             <div className="relative bg-[#2A2A2A] rounded-3xl p-8 mb-8 border border-gray-700">
               <div className="text-center mb-6">
-                <h2 className="text-xl font-semibold mb-2">Hora de ser real!</h2>
+                <h2 className="text-xl font-semibold mb-2">
+                  Hora de ser real!
+                </h2>
                 <p className="text-gray-400">
                   Capture um momento autêntico com suas duas câmeras
                 </p>
@@ -113,7 +117,9 @@ export function BeRealHome() {
             /* Posted Content */
             <div className="bg-[#2A2A2A] rounded-3xl p-6 mb-8 border border-gray-700">
               <div className="text-center mb-6">
-                <h2 className="text-xl font-semibold mb-2">Seu BeReal de hoje</h2>
+                <h2 className="text-xl font-semibold mb-2">
+                  Seu BeReal de hoje
+                </h2>
                 <p className="text-gray-400">Postado há 2 minutos</p>
               </div>
 
@@ -121,7 +127,7 @@ export function BeRealHome() {
               <div className="relative mb-6">
                 <div className="aspect-[3/4] bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center relative">
                   <div className="text-6xl">📸</div>
-                  
+
                   {/* Front camera result */}
                   <div className="absolute top-4 left-4 w-24 h-32 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-xl flex items-center justify-center border-2 border-white/20">
                     <div className="text-2xl">😊</div>
@@ -136,7 +142,7 @@ export function BeRealHome() {
                   </div>
                   <span className="font-medium">Gabriela</span>
                 </div>
-                
+
                 <button className="bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-full transition-colors">
                   <RotateCcw className="h-4 w-4" />
                 </button>
@@ -150,19 +156,26 @@ export function BeRealHome() {
               <Users className="h-5 w-5 text-blue-400" />
               <span>Atividade dos amigos</span>
             </h3>
-            
+
             <div className="space-y-3">
               {notifications.map((notification) => (
-                <div key={notification.id} className="flex items-center justify-between py-2">
+                <div
+                  key={notification.id}
+                  className="flex items-center justify-between py-2"
+                >
                   <div className="flex items-center space-x-3">
                     <div className="w-8 h-8 bg-gray-600 rounded-full"></div>
-                    <span className="text-gray-300">{notification.message}</span>
+                    <span className="text-gray-300">
+                      {notification.message}
+                    </span>
                   </div>
-                  <span className="text-gray-500 text-sm">{notification.time}</span>
+                  <span className="text-gray-500 text-sm">
+                    {notification.time}
+                  </span>
                 </div>
               ))}
             </div>
-            
+
             <button className="w-full mt-4 bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-xl font-medium transition-colors">
               Ver todos
             </button>
@@ -180,14 +193,14 @@ export function BeRealHome() {
               </div>
               <span className="text-xs font-medium">Câmera</span>
             </button>
-            
+
             <button className="flex flex-col items-center space-y-1 text-blue-400">
               <div className="w-12 h-12 bg-[#3B82F6] rounded-full flex items-center justify-center">
                 <Users className="h-6 w-6 text-white" />
               </div>
               <span className="text-xs font-medium">Feed</span>
             </button>
-            
+
             <button className="flex flex-col items-center space-y-1 text-gray-400 hover:text-white transition-colors">
               <div className="w-12 h-12 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition-colors">
                 <User className="h-6 w-6" />

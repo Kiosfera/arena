@@ -114,7 +114,8 @@ export default {
             boxShadow: "0 0 20px hsl(var(--neon-blue) / 0.3)",
           },
           "50%": {
-            boxShadow: "0 0 30px hsl(var(--neon-blue) / 0.8), 0 0 40px hsl(var(--neon-purple) / 0.4)",
+            boxShadow:
+              "0 0 30px hsl(var(--neon-blue) / 0.8), 0 0 40px hsl(var(--neon-purple) / 0.4)",
           },
         },
       },
@@ -126,7 +127,7 @@ export default {
         "glow-pulse": "glow-pulse 2s ease-in-out infinite",
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ["Inter", "system-ui", "sans-serif"],
       },
       backdropBlur: {
         xs: "2px",
