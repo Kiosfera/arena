@@ -16,8 +16,14 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/room/:influencerId" element={<InfluencerRoom />} />
-            <Route path="/profile/:influencerId" element={<PlaceholderPage title="Perfil do Influenciador" />} />
-            <Route path="/duels" element={<PlaceholderPage title="Arena de Duelos" />} />
+            <Route
+              path="/profile/:influencerId"
+              element={<PlaceholderPage title="Perfil do Influenciador" />}
+            />
+            <Route
+              path="/duels"
+              element={<PlaceholderPage title="Arena de Duelos" />}
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

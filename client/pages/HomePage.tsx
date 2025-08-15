@@ -30,21 +30,21 @@ const mockMessages: ChatMessage[] = [
     message: "Galera, hoje vai ter duelo épico! 🔥",
     timestamp: new Date(Date.now() - 300000),
     isInfluencer: true,
-    avatar: "🤠"
+    avatar: "🤠",
   },
   {
-    id: "2", 
+    id: "2",
     user: "Ana",
     message: "Mal posso esperar! Quem vai duelar?",
     timestamp: new Date(Date.now() - 240000),
-    avatar: "👩"
+    avatar: "👩",
   },
   {
     id: "3",
     user: "João",
     message: "Apostando no José hoje!",
     timestamp: new Date(Date.now() - 180000),
-    avatar: "👨"
+    avatar: "👨",
   },
   {
     id: "4",
@@ -52,15 +52,15 @@ const mockMessages: ChatMessage[] = [
     message: "Preparando uma surpresa especial! ✨",
     timestamp: new Date(Date.now() - 120000),
     isInfluencer: true,
-    avatar: "👸"
+    avatar: "👸",
   },
   {
     id: "5",
     user: "Pedro",
     message: "Arena Social tá ficando insano! 🚀",
     timestamp: new Date(Date.now() - 60000),
-    avatar: "🧑"
-  }
+    avatar: "🧑",
+  },
 ];
 
 const mockRooms: LiveRoom[] = [
@@ -72,7 +72,7 @@ const mockRooms: LiveRoom[] = [
     thumbnail: "🤠",
     status: "live",
     category: "Reality Show",
-    isLive: true
+    isLive: true,
   },
   {
     id: "casa-virginia",
@@ -80,9 +80,9 @@ const mockRooms: LiveRoom[] = [
     influencer: "Virginia Fonseca",
     viewers: 8930,
     thumbnail: "👸",
-    status: "live", 
+    status: "live",
     category: "Lifestyle",
-    isLive: true
+    isLive: true,
   },
   {
     id: "arena-combate",
@@ -92,7 +92,7 @@ const mockRooms: LiveRoom[] = [
     thumbnail: "🥊",
     status: "starting",
     category: "Duelos",
-    isLive: false
+    isLive: false,
   },
   {
     id: "talk-show",
@@ -101,9 +101,9 @@ const mockRooms: LiveRoom[] = [
     viewers: 6780,
     thumbnail: "🎭",
     status: "live",
-    category: "Talk Show", 
-    isLive: true
-  }
+    category: "Talk Show",
+    isLive: true,
+  },
 ];
 
 export function HomePage() {
@@ -119,25 +119,28 @@ export function HomePage() {
         "Esse duelo vai ser épico!",
         "Arena Social é o futuro! 🚀",
         "Apoiando o time azul! 💙",
-        "Que energia incrível! ⚡"
+        "Que energia incrível! ⚡",
       ];
-      
+
       const randomUsers = ["Miguel", "Sofia", "Lucas", "Isabella", "Davi"];
       const randomAvatars = ["👦", "👧", "👨", "👩", "🧑"];
-      
-      const randomMessage = randomMessages[Math.floor(Math.random() * randomMessages.length)];
-      const randomUser = randomUsers[Math.floor(Math.random() * randomUsers.length)];
-      const randomAvatar = randomAvatars[Math.floor(Math.random() * randomAvatars.length)];
-      
+
+      const randomMessage =
+        randomMessages[Math.floor(Math.random() * randomMessages.length)];
+      const randomUser =
+        randomUsers[Math.floor(Math.random() * randomUsers.length)];
+      const randomAvatar =
+        randomAvatars[Math.floor(Math.random() * randomAvatars.length)];
+
       const newMsg: ChatMessage = {
         id: Date.now().toString(),
         user: randomUser,
         message: randomMessage,
         timestamp: new Date(),
-        avatar: randomAvatar
+        avatar: randomAvatar,
       };
-      
-      setChatMessages(prev => [...prev.slice(-20), newMsg]);
+
+      setChatMessages((prev) => [...prev.slice(-20), newMsg]);
     }, 5000);
 
     return () => clearInterval(interval);
@@ -152,10 +155,10 @@ export function HomePage() {
       user: "Você",
       message: newMessage,
       timestamp: new Date(),
-      avatar: "😊"
+      avatar: "😊",
     };
 
-    setChatMessages(prev => [...prev, message]);
+    setChatMessages((prev) => [...prev, message]);
     setNewMessage("");
   };
 
@@ -179,7 +182,9 @@ export function HomePage() {
             </div>
             <div className="flex items-center space-x-2">
               <Flame className="h-4 w-4 text-status-live" />
-              <span>{activeRooms.filter(r => r.isLive).length} salas ao vivo</span>
+              <span>
+                {activeRooms.filter((r) => r.isLive).length} salas ao vivo
+              </span>
             </div>
           </div>
         </div>
@@ -207,7 +212,7 @@ export function HomePage() {
                   {/* Thumbnail */}
                   <div className="aspect-video bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 flex items-center justify-center relative">
                     <div className="text-6xl">{room.thumbnail}</div>
-                    
+
                     {/* Live Badge */}
                     {room.isLive && (
                       <div className="absolute top-3 left-3 bg-status-live text-white px-2 py-1 rounded-full text-xs font-bold flex items-center space-x-1 animate-pulse">
@@ -215,7 +220,7 @@ export function HomePage() {
                         <span>AO VIVO</span>
                       </div>
                     )}
-                    
+
                     {/* Viewers */}
                     <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs flex items-center space-x-1">
                       <Eye className="h-3 w-3" />
@@ -228,22 +233,28 @@ export function HomePage() {
                     <div className="flex items-start space-x-3">
                       <div className="flex items-center space-x-2 mb-2">
                         <Crown className="h-4 w-4 text-neon-purple" />
-                        <span className="text-sm text-neon-purple font-medium">{room.influencer}</span>
+                        <span className="text-sm text-neon-purple font-medium">
+                          {room.influencer}
+                        </span>
                       </div>
                     </div>
-                    
+
                     <h3 className="font-bold text-lg mb-2 group-hover:text-neon-blue transition-colors">
                       {room.name}
                     </h3>
-                    
+
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">{room.category}</span>
-                      <div className={cn(
-                        "px-2 py-1 rounded-full text-xs font-medium",
-                        room.isLive 
-                          ? "bg-status-live/10 text-status-live"
-                          : "bg-neon-purple/10 text-neon-purple"
-                      )}>
+                      <span className="text-sm text-muted-foreground">
+                        {room.category}
+                      </span>
+                      <div
+                        className={cn(
+                          "px-2 py-1 rounded-full text-xs font-medium",
+                          room.isLive
+                            ? "bg-status-live/10 text-status-live"
+                            : "bg-neon-purple/10 text-neon-purple",
+                        )}
+                      >
                         {room.isLive ? "Ao Vivo" : "Iniciando"}
                       </div>
                     </div>
@@ -272,45 +283,57 @@ export function HomePage() {
                   key={msg.id}
                   className={cn(
                     "flex items-start space-x-3 animate-fade-in",
-                    msg.user === "Você" && "flex-row-reverse space-x-reverse"
+                    msg.user === "Você" && "flex-row-reverse space-x-reverse",
                   )}
                 >
                   <div className="flex-shrink-0">
-                    <div className={cn(
-                      "w-8 h-8 rounded-full flex items-center justify-center text-sm",
-                      msg.isInfluencer 
-                        ? "bg-gradient-to-r from-neon-purple to-neon-pink neon-glow-purple" 
-                        : msg.user === "Você"
-                        ? "bg-chat-message-own"
-                        : "bg-secondary"
-                    )}>
+                    <div
+                      className={cn(
+                        "w-8 h-8 rounded-full flex items-center justify-center text-sm",
+                        msg.isInfluencer
+                          ? "bg-gradient-to-r from-neon-purple to-neon-pink neon-glow-purple"
+                          : msg.user === "Você"
+                            ? "bg-chat-message-own"
+                            : "bg-secondary",
+                      )}
+                    >
                       {msg.avatar}
                     </div>
                   </div>
-                  
-                  <div className={cn(
-                    "max-w-[70%]",
-                    msg.user === "Você" && "text-right"
-                  )}>
+
+                  <div
+                    className={cn(
+                      "max-w-[70%]",
+                      msg.user === "Você" && "text-right",
+                    )}
+                  >
                     <div className="flex items-center space-x-2 mb-1">
-                      <span className={cn(
-                        "text-sm font-medium",
-                        msg.isInfluencer && "text-neon-purple flex items-center space-x-1"
-                      )}>
+                      <span
+                        className={cn(
+                          "text-sm font-medium",
+                          msg.isInfluencer &&
+                            "text-neon-purple flex items-center space-x-1",
+                        )}
+                      >
                         {msg.isInfluencer && <Crown className="h-3 w-3" />}
                         <span>{msg.user}</span>
                       </span>
                       <span className="text-xs text-muted-foreground">
-                        {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        {msg.timestamp.toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
                       </span>
                     </div>
-                    
-                    <div className={cn(
-                      "px-3 py-2 rounded-lg text-sm",
-                      msg.user === "Você"
-                        ? "bg-chat-message-own text-primary-foreground"
-                        : "bg-chat-message"
-                    )}>
+
+                    <div
+                      className={cn(
+                        "px-3 py-2 rounded-lg text-sm",
+                        msg.user === "Você"
+                          ? "bg-chat-message-own text-primary-foreground"
+                          : "bg-chat-message",
+                      )}
+                    >
                       {msg.message}
                     </div>
                   </div>
@@ -319,7 +342,10 @@ export function HomePage() {
             </div>
 
             {/* Message Input */}
-            <form onSubmit={handleSendMessage} className="p-4 border-t border-border">
+            <form
+              onSubmit={handleSendMessage}
+              className="p-4 border-t border-border"
+            >
               <div className="flex space-x-2">
                 <input
                   type="text"

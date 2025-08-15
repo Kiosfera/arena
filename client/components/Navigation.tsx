@@ -31,7 +31,7 @@ export function Navigation() {
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = location.pathname === item.href;
-              
+
               return (
                 <Link
                   key={item.href}
@@ -40,7 +40,7 @@ export function Navigation() {
                     "flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 group",
                     isActive
                       ? "text-neon-blue bg-neon-blue/10 neon-glow"
-                      : "text-muted-foreground hover:text-neon-purple hover:bg-neon-purple/10"
+                      : "text-muted-foreground hover:text-neon-purple hover:bg-neon-purple/10",
                   )}
                 >
                   <Icon className="h-4 w-4" />
@@ -55,7 +55,7 @@ export function Navigation() {
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = location.pathname === item.href;
-              
+
               return (
                 <Link
                   key={item.href}
@@ -64,7 +64,7 @@ export function Navigation() {
                     "p-2 rounded-lg transition-all duration-300",
                     isActive
                       ? "text-neon-blue bg-neon-blue/10 neon-glow"
-                      : "text-muted-foreground hover:text-neon-purple hover:bg-neon-purple/10"
+                      : "text-muted-foreground hover:text-neon-purple hover:bg-neon-purple/10",
                   )}
                 >
                   <Icon className="h-5 w-5" />
