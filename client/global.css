@@ -2,192 +2,120 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  /**
-   * Arena Social - Dark Neon Theme
-   * Futuristic platform with vibrant neon accents
-   */
-  :root {
-    /* Dark base theme */
-    --background: 220 27% 4%;
-    --foreground: 210 40% 98%;
-
-    --card: 220 27% 6%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 220 27% 6%;
-    --popover-foreground: 210 40% 98%;
-
-    /* Neon primary (electric blue) */
-    --primary: 217 91% 60%;
-    --primary-foreground: 220 27% 4%;
-
-    /* Dark secondary */
-    --secondary: 220 27% 8%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 220 27% 8%;
-    --muted-foreground: 215 20% 65%;
-
-    /* Neon accent (bright purple) */
-    --accent: 290 84% 60%;
-    --accent-foreground: 220 27% 4%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 220 27% 12%;
-    --input: 220 27% 12%;
-    --ring: 217 91% 60%;
-
-    --radius: 0.75rem;
-
-    /* Custom Arena Social colors */
-    --neon-blue: 217 91% 60%;
-    --neon-purple: 290 84% 60%;
-    --neon-pink: 328 86% 70%;
-    --neon-green: 120 84% 60%;
-
-    /* Chat and UI specific */
-    --chat-bg: 220 27% 3%;
-    --chat-message: 220 27% 8%;
-    --chat-message-own: 217 91% 60%;
-
-    /* Dueling system colors */
-    --duel-left: 217 91% 60%;
-    --duel-right: 328 86% 70%;
-
-    /* Status indicators */
-    --status-live: 0 84% 60%;
-    --status-online: 120 84% 60%;
-    --status-offline: 215 20% 45%;
-  }
-
-  .dark {
-    --background: 220 27% 4%;
-    --foreground: 210 40% 98%;
-    --card: 220 27% 6%;
-    --card-foreground: 210 40% 98%;
-    --popover: 220 27% 6%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 220 27% 4%;
-    --secondary: 220 27% 8%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 220 27% 8%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 290 84% 60%;
-    --accent-foreground: 220 27% 4%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 220 27% 12%;
-    --input: 220 27% 12%;
-    --ring: 217 91% 60%;
-  }
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 @layer base {
   * {
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground antialiased;
-    font-family:
-      "Inter",
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      sans-serif;
-  }
-
   html {
     scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-[#1E1E1E] text-white antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Custom scrollbar for BeReal aesthetic */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #2A2A2A;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #3B82F6;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2563EB;
   }
 }
 
 @layer utilities {
-  .neon-glow {
-    box-shadow: 0 0 20px hsl(var(--neon-blue) / 0.5);
+  /* BeReal-specific utilities */
+  .bereal-shadow {
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15);
   }
-
-  .neon-glow-purple {
-    box-shadow: 0 0 20px hsl(var(--neon-purple) / 0.5);
+  
+  .bereal-shadow-hover {
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.25);
   }
-
-  .neon-glow-pink {
-    box-shadow: 0 0 20px hsl(var(--neon-pink) / 0.5);
+  
+  .bereal-gradient {
+    background: linear-gradient(135deg, #3B82F6, #8B5CF6);
   }
-
-  .text-neon-blue {
-    color: hsl(var(--neon-blue));
+  
+  .text-bereal-gray {
+    color: #9CA3AF;
   }
-
-  .text-neon-purple {
-    color: hsl(var(--neon-purple));
+  
+  .bg-bereal-dark {
+    background-color: #1E1E1E;
   }
-
-  .text-neon-pink {
-    color: hsl(var(--neon-pink));
+  
+  .bg-bereal-card {
+    background-color: #2A2A2A;
   }
-
-  .bg-neon-blue {
-    background-color: hsl(var(--neon-blue));
+  
+  .border-bereal {
+    border-color: #374151;
   }
-
-  .bg-neon-purple {
-    background-color: hsl(var(--neon-purple));
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
   }
-
-  .bg-neon-pink {
-    background-color: hsl(var(--neon-pink));
-  }
-
-  .gradient-neon {
-    background: linear-gradient(
-      135deg,
-      hsl(var(--neon-blue)),
-      hsl(var(--neon-purple)),
-      hsl(var(--neon-pink))
-    );
-  }
-
-  .animate-pulse-slow {
-    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite alternate;
+  
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
   }
 }
 
-@keyframes glow {
+@keyframes fadeIn {
   from {
-    box-shadow: 0 0 20px hsl(var(--neon-blue) / 0.3);
+    opacity: 0;
+    transform: translateY(10px);
   }
   to {
-    box-shadow:
-      0 0 30px hsl(var(--neon-blue) / 0.8),
-      0 0 40px hsl(var(--neon-purple) / 0.4);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: hsl(var(--background));
+/* Mobile-first responsive design */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--neon-blue) / 0.6);
-  border-radius: 4px;
+/* Focus styles for accessibility */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-[#1E1E1E];
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--neon-blue));
+/* Smooth transitions for interactive elements */
+button,
+input,
+textarea {
+  @apply transition-all duration-200;
 }
